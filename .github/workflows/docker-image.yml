@@ -30,14 +30,40 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/project:latest
       -
-         name: Deploy image
-         run: kubectl apply -f deployment-script-app.yml 
-        
-        # id: install-kubectl
-        # uses: jtalk/k8s-deploy@v2
-        # with:
-        #   namespace: 'myapp'
-        #   manifests: |
-        #       deployment-script-app.yml
-        #   images: '${{ secrets.DOCKERHUB_USERNAME }}/project:latest'
-        #   kubectl-version: 'latest'
+        name: Set up Minikube
+        run: |
+          curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+          sudo install minikube-linux-amd64 /usr/local/bin/minikube
+  
+          # Start Minikube
+          minikube start --driver=docker
+  
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v1
+        with:
+          version: 'latest'
+  
+      - name: Configure kubectl for Minikube
+        run: |
+          kubectl config set-cluster minikube \
+            --server=https://127.0.0.1:32767 \
+            --certificate-authority=$(minikube get certs dir)/ca.crt
+  
+          kubectl config set-context minikube \
+            --cluster=minikube \
+            --user=minikube
+  
+          kubectl config use-context minikube
+  
+      # - name: Deploy to Minikube
+      #   run: |
+      #     # Your deployment commands here
+          
+          # id: install-kubectl
+          # uses: jtalk/k8s-deploy@v2
+          # with:
+          #   namespace: 'myapp'
+          #   manifests: |
+          #       deployment-script-app.yml
+          #   images: '${{ secrets.DOCKERHUB_USERNAME }}/project:latest'
+          #   kubectl-version: 'latest'
