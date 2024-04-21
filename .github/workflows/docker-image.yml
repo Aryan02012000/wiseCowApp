@@ -63,15 +63,15 @@ jobs:
       - name: Deploy to Minikube
         run: |
           kubectl apply -f deployment-script-app.yml
-      
-           
-           # Your deployment commands here
-          
-          # id: install-kubectl
-          # uses: jtalk/k8s-deploy@v2
-          # with:
-          #   namespace: 'myapp'
-          #   manifests: |
-          #       deployment-script-app.yml
-          #   images: '${{ secrets.DOCKERHUB_USERNAME }}/project:latest'
-          #   kubectl-version: 'latest'
+        
+             
+             # Your deployment commands here
+            
+            # id: install-kubectl
+            # uses: jtalk/k8s-deploy@v2
+            # with:
+            #   namespace: 'myapp'
+            #   manifests: |
+            #       deployment-script-app.yml
+            #   images: '${{ secrets.DOCKERHUB_USERNAME }}/project:latest'
+            #   kubectl-version: 'latest'
