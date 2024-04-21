@@ -61,18 +61,32 @@ jobs:
   
       - name: Deploy to Minikube
         run: |
-            kubectl apply -f path/to/deployment-script-app.yml
+            kubectl apply -f ../deployment-script-app.yml
 
 
-         
-         
-            
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
           # Your deployment commands here
           # id: install-kubectl
           # uses: jtalk/k8s-deploy@v2
