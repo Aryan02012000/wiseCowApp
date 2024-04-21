@@ -29,3 +29,12 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/project:latest
+      -
+        name: Deploy
+        uses: jtalk/k8s-deploy@v2
+        with:
+          namespace: 'myapp'
+          manifests: |
+              deployment-script-app.yml
+          images: '${{ secrets.DOCKERHUB_USERNAME }}/project:latest'
+          kubectl-version: 'latest'
