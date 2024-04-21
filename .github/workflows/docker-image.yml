@@ -11,6 +11,14 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - 
+        name: Checkout Repository
+        uses: actions/checkout@v2
+      - 
+        name: Setup Minikube
+        run: |
+          minikube start
+        
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -29,6 +37,7 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/project:latest
+     
       -
         # name: Set up Minikube
         name: Pull Docker Image
