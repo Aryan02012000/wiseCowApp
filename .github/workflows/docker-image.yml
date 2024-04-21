@@ -61,8 +61,7 @@ jobs:
   
       - name: Deploy to Minikube
         run: |
-            cd ./
-            kubectl apply -f deployment-script-app.yml
+            kubectl apply -f path/to/deployment-script-app.yml
 
 
          
